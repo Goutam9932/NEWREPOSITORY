@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 750px;
+            height: 93vh;
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-step {
+            padding: 17px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        p {
+            color: #666;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background-color: #e0e0e0;
+            color: #666;
+            font-size: 14px;
+            flex: 1;
+            text-align: center;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step i {
+            margin-right: 5px;
+        }
+
+        .step.completed {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+        .step.active {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        small {
+            display: block;
+            margin-top: 5px;
+            color: #999;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .search-box input[type="text"] {
+            padding-right: 30px;
+        }
+
+        .search-box .fa-search {
+            position: absolute;
+            right: 10px;
+            top: 16px;
+            color: #aaa;
+        }
+
+        .user-list {
+            list-style: none;
+            padding: 0;
+            /* margin: 0; */
+            max-height: 180px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .user-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-list li:last-child {
+            border-bottom: none;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f9f9f9; /* Ensure footer has background */
+            border-top: 1px solid #ddd; /* Add top border for separation */
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
+        .next-btn {
+            background-color: #f39c12;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .next-btn i {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal">
+        <form id="create-group-form">
+            <div class="modal-step" id="step-1">
+                <h2>Create Group</h2>
+                <p>Create new group and add users to the group.</p>
+                <div class="modal-header">
+                    <div class="step active"><i class="fas fa-info-circle"></i> Basic Details</div>
+                    <div class="step"><i class="fas fa-users"></i> Assign Roles</div>
+                </div>
+                <div class="form-group">
+                    <label for="user-store">User Store</label>
+                    <select id="user-store" name="userStore" required>
+                        <option value="primary">Primary</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="group-name">Group Name</label>
+                    <input type="text" id="group-name" name="groupName" required placeholder="Enter group name">
+                    <small>A name for the group. Can contain between 3 to 30 alphanumeric characters, dashes (-), and underscores (_).</small>
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn cancel-btn">Cancel</button>
+                    <button type="button" class="btn next-btn" onclick="showStep(2)">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="modal-step" id="step-2" style="display: none;">
+                <h2>Create Group</h2>
+                <p>Create new group and add users to the group.</p>
+                <div class="modal-header">
+                    <div class="step completed"><i class="fas fa-info-circle"></i> Basic Details</div>
+                    <div class="step active"><i class="fas fa-users"></i> Assign Roles</div>
+                </div>
+                <div class="form-group">
+                    <label for="user-list">Add Users</label>
+                    <p>Select users to add them to the user group.</p>
+                    <div class="search-box">
+                        <input type="text" id="search-users" placeholder="Search users">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <ul class="user-list">
+                        <li>
+                            <input type="checkbox" value="1" name="userIds" id="user1">
+                            <label for="user1">Abinash Nayak</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="2" name="userIds" id="user2">
+                            <label for="user2">Anurag Reddy</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="3" name="userIds" id="user3">
+                            <label for="user3">Chinmayee Mohapatra</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" value="4" name="userIds" id="user4">
+                            <label for="user4">Harapriya Nahak</label>
+                        </li>
+                        <!-- More users can be added here -->
+                    </ul>
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn cancel-btn" onclick="showStep(1)">Back</button>
+                    <button type="submit" class="btn next-btn">Submit <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search-users');
+            const userList = document.querySelector('.user-list');
+
+            searchInput.addEventListener('input', () => {
+                const searchValue = searchInput.value.toLowerCase();
+                const users = userList.querySelectorAll('li');
+
+                users.forEach(user => {
+                    const userName = user.textContent.toLowerCase();
+                    if (userName.includes(searchValue)) {
+                        user.style.display = '';
+                    } else {
+                        user.style.display = 'none';
+                    }
+                });
+            });
+
+            const cancelButton = document.querySelector('.cancel-btn');
+            cancelButton.addEventListener('click', () => {
+                alert('Cancel button clicked');
+            });
+        });
+
+        function showStep(step) {
+            const steps = document.querySelectorAll('.modal-step');
+            steps.forEach((stepDiv, index) => {
+                stepDiv.style.display = (index + 1 === step) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 400px;
+    max-width: 100%;
+}
+
+#modal-step-2 {
+    padding: 30px; /* Increased padding */
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p {
+    color: #666;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px; /* Increased margin */
+}
+
+.step {
+    padding: 15px 25px; /* Increased padding */
+    border-radius: 20px;
+    background-color: #e0e0e0;
+    color: #666;
+    font-size: 12px; /* Increased font size */
+}
+
+.step.completed {
+    background-color: #f39c12;
+    color: #fff;
+}
+
+.step.active {
+    background-color: #555;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 30px; /* Increased margin */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px; /* Increased margin */
+    font-weight: bold;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 15px; /* Increased padding */
+    margin-top: 10px; /* Increased margin */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+small {
+    display: block;
+    margin-top: 10px; /* Increased margin */
+    color: #999;
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 20px; /* Increased margin */
+}
+
+.search-box input[type="text"] {
+    width: calc(100% - 30px);
+    padding-right: 30px;
+}
+
+.search-box .fa-search {
+    position: absolute;
+    right: 10px;
+    top: 15px; /* Adjusted top position */
+    color: #aaa;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.user-list li {
+    padding: 15px; /* Increased padding */
+    border-bottom: 1px solid #ddd;
+}
+
+.user-list li:last-child {
+    border-bottom: none;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px; /* Added padding */
+    background-color: #f9f9f9; /* Ensure footer has background */
+    border-top: 1px solid #ddd; /* Add top border for separation */
+}
+
+.btn {
+    padding: 15px 25px; /* Increased padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.next-btn {
+    background-color: #f39c12;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.next-btn i {
+    margin-left: 10px; /* Increased margin */
+}
